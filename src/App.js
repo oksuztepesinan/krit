@@ -464,7 +464,8 @@ YANIT FORMATI — Sadece JSON döndür, başka hiçbir şey yazma:
       
       if (!res.ok) throw new Error("API hatası: " + res.status);
       const data = await res.json();
-      const text = data.content.map(b => b.text || "").join("");
+      if (!data.content) throw new Error(JSON.stringify(data));
+const text = data.content.map(b => b.text || "").join("");
       const clean = text.replace(/```json|```/g, "").trim();
       const parsed = JSON.parse(clean);
       
