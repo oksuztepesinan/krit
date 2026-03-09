@@ -471,7 +471,7 @@ YANIT FORMATI — Sadece JSON döndür, başka hiçbir şey yazma:
       setSuggestion(parsed.suggestion);
       setAnalysis(parsed);
       if (parsed.energy_segments && parsed.energy_segments.length > 0) {
-        setEnergySegments(parsed.energy_segments);
+        setEnergySegments(parsed.energy_segments.map(s => ({...s, risk: s.risk || "normal"})));
       }
       setTodoItems((parsed.todo || []).map(t => ({ text: t, done: false })));
       setScreen("suggestion");
