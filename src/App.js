@@ -256,7 +256,7 @@ ${mode === "master" ? "\nMastering: Spotify -14 LUFS, Apple Music -16 LUFS, True
       } else {
         content.push({ type: "text", text: `Bu demoyu analiz et. Genre: ${genre}. Mod: ${mode}.` });
       }
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
+      const res = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ model: "claude-opus-4-5", max_tokens: 4000, system: buildSystemPrompt(), messages: [{ role: "user", content }] }),
@@ -282,7 +282,7 @@ ${mode === "master" ? "\nMastering: Spotify -14 LUFS, Apple Music -16 LUFS, True
     setScreen("analyzing");
     try {
       const b64 = await fileToBase64(file);
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
+      const res = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
